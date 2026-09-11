@@ -30,7 +30,72 @@ input,textarea,button{font:inherit;color:inherit}
 [data-zoom]:hover img{transform:scale(1.035)}
 [data-photo="bw"] [data-zoom] img{filter:grayscale(1) contrast(1.06)}
 [data-svc]:hover{color:var(--color-accent-700)}
-@media (max-width:900px){[data-desk]{display:none !important}[data-mob]{display:inline-flex !important}}
+#services a{color:inherit;text-decoration:none;display:block}
+#services a:hover{color:var(--color-accent-700)}
+.work-shots{display:grid;gap:clamp(10px,1.4vw,18px);min-width:0}
+.work-shots figure{margin:0;background:var(--color-neutral-200);min-width:0}
+.work-shots img{width:100%;height:auto;object-fit:cover;display:block}
+.work-shots figcaption{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px;background:transparent}
+.work-shots[data-layout="kitchens"],
+.work-shots[data-layout="tilebath"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-shots[data-layout="master"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.work-shots[data-layout="remodel"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-shots[data-layout="framing"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.work-shots[data-layout="pair"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.work-shots[data-layout="stone"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-shots[data-layout="mixed"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-shots .span-full{grid-column:1/-1}
+.work-shots .span-2{grid-column:span 2}
+.work-shots .ratio-169 img{aspect-ratio:16/9}
+.work-shots .ratio-219 img{aspect-ratio:21/9}
+.work-shots .ratio-21 img{aspect-ratio:2/1}
+.work-shots .ratio-43 img{aspect-ratio:4/3}
+.work-shots .ratio-34 img{aspect-ratio:3/4}
+.work-shots .ratio-1610 img{aspect-ratio:16/10}
+.about-inner{width:100%;max-width:1560px;margin:0 auto;padding:clamp(48px,8vw,120px) clamp(18px,4vw,56px);display:grid;gap:clamp(28px,4vw,56px)}
+.about-top{display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:minmax(180px,.7fr) minmax(280px,1.3fr);align-items:start}
+.about-bio{display:flex;gap:clamp(16px,2.4vw,28px);align-items:flex-start}
+.about-portrait{width:160px;flex:0 0 160px;max-width:160px;min-width:0;aspect-ratio:3/4;overflow:hidden;background:var(--color-neutral-200)}
+.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 28%}
+.about-copy{min-width:0;max-width:62ch;background:var(--color-bg)}
+.about-copy p{margin:0 0 14px}
+.about-copy p:last-child{margin-bottom:0}
+.about-lead{font-size:clamp(20px,2.2vw,28px);font-weight:500;line-height:1.28;letter-spacing:-.015em;text-wrap:pretty}
+.about-body{font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--color-neutral-800)}
+.about-loc{font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px}
+.about-atmosphere{display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(2,minmax(0,1fr))}
+.about-atmosphere figure{margin:0;background:var(--color-neutral-200);min-width:0}
+.about-atmosphere img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+@media (max-width:1100px){
+  .work-shots[data-layout="kitchens"],
+  .work-shots[data-layout="master"],
+  .work-shots[data-layout="tilebath"],
+  .work-shots[data-layout="remodel"],
+  .work-shots[data-layout="framing"],
+  .work-shots[data-layout="stone"],
+  .work-shots[data-layout="mixed"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:900px){
+  [data-desk]{display:none !important}
+  [data-mob]{display:inline-flex !important}
+  .about-top{grid-template-columns:1fr}
+  .about-bio{flex-direction:column;align-items:flex-start}
+  .about-portrait{width:120px !important;flex:0 0 120px !important;max-width:120px !important;height:120px !important;aspect-ratio:1 !important;border-radius:50%;overflow:hidden}
+  .about-portrait img{border-radius:50%;object-position:50% 22%}
+  [data-carousel]{display:flex;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;gap:12px;scrollbar-width:none}
+  [data-carousel]::-webkit-scrollbar{display:none}
+  [data-carousel] figure,
+  [data-carousel] .span-full,
+  [data-carousel] .span-2{flex:0 0 78%;grid-column:auto}
+  [data-carousel] img,
+  [data-carousel] .ratio-169 img,
+  [data-carousel] .ratio-219 img,
+  [data-carousel] .ratio-21 img,
+  [data-carousel] .ratio-43 img,
+  [data-carousel] .ratio-34 img,
+  [data-carousel] .ratio-1610 img{aspect-ratio:4/5;height:auto}
+  .about-atmosphere[data-carousel] img{aspect-ratio:16/10}
+}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-anim] [data-reveal]{opacity:1;transform:none}[data-zoom] img{transition:none}[data-zoom]:hover img{transform:none}}
 </style>
 </helmet>
@@ -103,140 +168,134 @@ input,textarea,button{font:inherit;color:inherit}
     <h2 style="margin:0;font-size:clamp(30px,5.5vw,72px);line-height:1;letter-spacing:-.03em;text-transform:uppercase">Selected Work</h2>
   </div>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-kitchens" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">01</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Kitchens</h3>
     </header>
-    <figure data-zoom="1" style="margin:0 0 clamp(10px,1.4vw,18px);background:var(--color-neutral-200)">
-      <img src="photos/kitchens1.jpg" alt="Finished kitchen with white cabinets, quartz island, pendant lights and hardwood flooring" loading="lazy" decoding="async" width="1289" height="959" style="width:100%;height:auto;aspect-ratio:16/9;object-fit:cover">
-    </figure>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/kitchens2.jpg" alt="Kitchen cabinetry and countertop installation" loading="lazy" decoding="async" width="1289" height="1693" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/kitchens3.jpg" alt="Kitchen interior during a Glazer Construction build" loading="lazy" decoding="async" width="1289" height="1672" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/kitchens4.jpg" alt="Kitchen detail after completion" loading="lazy" decoding="async" width="1289" height="1691" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="kitchens" role="region" aria-label="Kitchen photos">
+      <figure class="span-full ratio-169" data-zoom="1"><img src="photos/kitchens1.jpg" alt="Finished kitchen with white cabinets, quartz island, pendant lights and hardwood flooring" loading="lazy" decoding="async" width="1289" height="959"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens2.jpg" alt="Kitchen cabinetry and countertop installation" loading="lazy" decoding="async" width="1289" height="1693"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens3.jpg" alt="Kitchen interior during a Glazer Construction build" loading="lazy" decoding="async" width="1289" height="1672"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens4.jpg" alt="Kitchen detail after completion" loading="lazy" decoding="async" width="1289" height="1691"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens5.jpeg" alt="Kitchen with white cabinets, quartz island, woven pendant lights and hexagonal tile floor" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens6.jpeg" alt="Commercial pantry kitchen with light wood cabinetry and quartz counters" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-master-bathroom" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">02</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Master Bathroom</h3>
     </header>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/master-bathroom1.jpg" alt="Finished master bathroom: large-format white tile, soaking tub, brass fixtures and a navy vanity" loading="lazy" decoding="async" width="1289" height="1693" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/master-bathroom2.jpg" alt="Master bathroom with tiled walls and floor" loading="lazy" decoding="async" width="1289" height="1696" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/master-bathroom3.jpg" alt="Master bathroom vanity and fixtures" loading="lazy" decoding="async" width="1289" height="1680" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="master" role="region" aria-label="Master bathroom photos">
+      <figure class="ratio-34" data-zoom="1"><img src="photos/master-bathroom1.jpg" alt="Finished master bathroom: large-format white tile, soaking tub, brass fixtures and a navy vanity" loading="lazy" decoding="async" width="1289" height="1693"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/master-bathroom2.jpg" alt="Master bathroom with tiled walls and floor" loading="lazy" decoding="async" width="1289" height="1696"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/master-bathroom3.jpg" alt="Master bathroom vanity and fixtures" loading="lazy" decoding="async" width="1289" height="1680"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/IMG_4003.jpeg" alt="Finished master bathroom with freestanding tub, walnut vanity and large-format tile" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-bathroom-tile" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">03</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Bathroom Tile &amp; Glass Door Installation</h3>
     </header>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/bathroom-tile.jpg" alt="Tiled shower with glass door installation" loading="lazy" decoding="async" width="1289" height="1705" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/bathroom-tile2.jpg" alt="Bathroom tile work in progress" loading="lazy" decoding="async" width="1289" height="1670" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/bathroom-tile3.jpg" alt="Completed bathroom tile and glass enclosure" loading="lazy" decoding="async" width="1289" height="1702" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="tilebath" role="region" aria-label="Bathroom tile photos">
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-tile.jpg" alt="Tiled shower with glass door installation" loading="lazy" decoding="async" width="1289" height="1705"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-tile2.jpg" alt="Bathroom tile work in progress" loading="lazy" decoding="async" width="1289" height="1670"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-tile3.jpg" alt="Completed bathroom tile and glass enclosure" loading="lazy" decoding="async" width="1289" height="1702"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-bathroom-remodel" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">04</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Bathroom Remodel</h3>
     </header>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);grid-column:span 2;min-width:0"><img src="photos/bathoom-remodel1.jpg" alt="Remodeled bathroom, finished" loading="lazy" decoding="async" width="1289" height="1689" style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0"><img src="photos/bathroom-remodel2.jpg" alt="Bathroom remodel: shower and tile detail" loading="lazy" decoding="async" width="1289" height="1704" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0"><img src="photos/bathroom-remodel3.jpg" alt="Bathroom remodel: vanity and fittings" loading="lazy" decoding="async" width="1289" height="1717" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="remodel" role="region" aria-label="Bathroom remodel photos">
+      <figure class="span-2 ratio-43" data-zoom="1"><img src="photos/bathoom-remodel1.jpg" alt="Remodeled bathroom, finished" loading="lazy" decoding="async" width="1289" height="1689"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel2.jpg" alt="Bathroom remodel: shower and tile detail" loading="lazy" decoding="async" width="1289" height="1704"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel3.jpg" alt="Bathroom remodel: vanity and fittings" loading="lazy" decoding="async" width="1289" height="1717"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel4.jpeg" alt="Remodeled bathroom with navy vanity, white tile wainscot and pendant lights" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-framing" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">05</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Framing &amp; Custom Framing</h3>
     </header>
-    <figure data-zoom="1" style="margin:0 0 clamp(10px,1.4vw,18px);background:var(--color-neutral-200)">
-      <img src="photos/custom-framing2.jpg" alt="Custom framing work on site" loading="lazy" decoding="async" width="1289" height="702" style="width:100%;height:auto;aspect-ratio:21/9;object-fit:cover">
-    </figure>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/framing1.jpg" alt="Timber framing during construction" loading="lazy" decoding="async" width="1290" height="2280" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/framing2.jpg" alt="Framed interior walls and openings" loading="lazy" decoding="async" width="1289" height="2287" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/custom-framing1.jpg" alt="Custom framing detail" loading="lazy" decoding="async" width="1289" height="1712" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="framing" role="region" aria-label="Framing photos">
+      <figure class="span-full ratio-219" data-zoom="1"><img src="photos/custom-framing2.jpg" alt="Custom framing work on site" loading="lazy" decoding="async" width="1289" height="702"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/framing1.jpg" alt="Timber framing during construction" loading="lazy" decoding="async" width="1290" height="2280"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/framing2.jpg" alt="Framed interior walls and openings" loading="lazy" decoding="async" width="1289" height="2287"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/custom-framing1.jpg" alt="Custom framing detail" loading="lazy" decoding="async" width="1289" height="1712"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/framing3.jpeg" alt="Interior framing and ceiling work during a renovation" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-shingle" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">06</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Shingle Roofing</h3>
     </header>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0"><img src="photos/shingle2.jpg" alt="Shingle roof installation seen from above" loading="lazy" decoding="async" width="1289" height="740" style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0"><img src="photos/shingle1.jpg" alt="Roof shingles being laid on a house" loading="lazy" decoding="async" width="1289" height="2296" style="width:100%;height:auto;aspect-ratio:4/3;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="pair" role="region" aria-label="Shingle roofing photos">
+      <figure class="ratio-43" data-zoom="1"><img src="photos/shingle2.jpg" alt="Shingle roof installation seen from above" loading="lazy" decoding="async" width="1289" height="740"></figure>
+      <figure class="ratio-43" data-zoom="1"><img src="photos/shingle1.jpg" alt="Roof shingles being laid on a house" loading="lazy" decoding="async" width="1289" height="2296"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
-    <div style="display:grid;gap:clamp(18px,3vw,44px);grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));align-items:end">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0">
-        <img src="photos/trex-deck2.jpg" alt="Railing being fitted on a new Trex deck" loading="lazy" decoding="async" width="1289" height="700" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover">
-      </figure>
-      <div>
-        <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(16px,2vw,28px)">
-          <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">07</span>
-          <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Trex Deck</h3>
-        </header>
-        <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)">
-          <img src="photos/trex-deck1.jpg" alt="Trex deck boards and framing" loading="lazy" decoding="async" width="1289" height="2279" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover">
-        </figure>
-      </div>
+  <article id="work-trex" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+    <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
+      <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">07</span>
+      <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Trex Deck</h3>
+    </header>
+    <div class="work-shots" data-carousel data-layout="pair" role="region" aria-label="Trex deck photos">
+      <figure class="ratio-1610" data-zoom="1"><img src="photos/trex-deck2.jpg" alt="Railing being fitted on a new Trex deck" loading="lazy" decoding="async" width="1289" height="700"></figure>
+      <figure class="ratio-1610" data-zoom="1"><img src="photos/trex-deck1.jpg" alt="Trex deck boards and framing" loading="lazy" decoding="async" width="1289" height="2279"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-asphalt" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">08</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Asphalt Paving, Driveways &amp; Walkways</h3>
     </header>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0"><img src="photos/asphalt-paving1.jpg" alt="Newly paved asphalt driveway" loading="lazy" decoding="async" width="1289" height="712" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200);min-width:0"><img src="photos/asphalt-paving2.jpg" alt="Asphalt paving and walkway work" loading="lazy" decoding="async" width="1289" height="2272" style="width:100%;height:auto;aspect-ratio:16/10;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="pair" role="region" aria-label="Asphalt paving photos">
+      <figure class="ratio-1610" data-zoom="1"><img src="photos/asphalt-paving1.jpg" alt="Newly paved asphalt driveway" loading="lazy" decoding="async" width="1289" height="712"></figure>
+      <figure class="ratio-1610" data-zoom="1"><img src="photos/asphalt-paving2.jpg" alt="Asphalt paving and walkway work" loading="lazy" decoding="async" width="1289" height="2272"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+  <article id="work-tile-stone" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">09</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Tile, Stone &amp; Concrete Excavation</h3>
     </header>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/tile-stone1.jpg" alt="Tile and stone work" loading="lazy" decoding="async" width="1289" height="1730" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/tile-stone2.jpg" alt="Stone and concrete work on site" loading="lazy" decoding="async" width="1289" height="1697" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/tile-stone3.jpg" alt="Concrete excavation in progress" loading="lazy" decoding="async" width="1288" height="1705" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
-      <figure data-zoom="1" style="margin:0;background:var(--color-neutral-200)"><img src="photos/tile-stone4.jpg" alt="Tile and stone installation detail" loading="lazy" decoding="async" width="1288" height="1714" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover"></figure>
+    <div class="work-shots" data-carousel data-layout="stone" role="region" aria-label="Tile and stone photos">
+      <figure class="ratio-34" data-zoom="1"><img src="photos/tile-stone1.jpg" alt="Tile and stone work" loading="lazy" decoding="async" width="1289" height="1730"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/tile-stone2.jpg" alt="Stone and concrete work on site" loading="lazy" decoding="async" width="1289" height="1697"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/tile-stone3.jpg" alt="Concrete excavation in progress" loading="lazy" decoding="async" width="1288" height="1705"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/tile-stone4.jpg" alt="Tile and stone installation detail" loading="lazy" decoding="async" width="1288" height="1714"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/tile-stone5.jpeg" alt="Waterfront patio with patterned stone pavers" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/tile-stone6.jpeg" alt="Marble shower bench and mosaic tile floor" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
-  <article data-reveal="0" style="border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0 clamp(48px,7vw,104px)">
+  <article id="work-interiors" data-reveal="0" style="border-top:2px solid var(--color-divider);border-bottom:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0 clamp(48px,7vw,104px)">
     <header style="display:flex;flex-wrap:wrap;align-items:baseline;gap:clamp(12px,2.5vw,32px);margin-bottom:clamp(20px,3vw,36px)">
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">10</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Basements, Drywall, Carpentry &amp; Windows</h3>
     </header>
-    <figure data-zoom="1" style="margin:0 0 clamp(10px,1.4vw,18px);background:var(--color-neutral-200)">
-      <img src="photos/basement1.jpg" alt="Basement renovation in progress: framed walls, concrete floor opened for drain lines" loading="lazy" decoding="async" width="1289" height="961" style="width:100%;height:auto;aspect-ratio:2/1;object-fit:cover">
-      <figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Basement renovations</figcaption>
-    </figure>
-    <div style="display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr))">
-      <figure data-zoom="1" style="margin:0"><img src="photos/drywall1.jpg" alt="Drywall installed and taped" loading="lazy" decoding="async" width="1289" height="2259" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:var(--color-neutral-200)"><figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Drywall install</figcaption></figure>
-      <figure data-zoom="1" style="margin:0"><img src="photos/drywall2.jpg" alt="Drywall install in a finished room" loading="lazy" decoding="async" width="1289" height="1709" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:var(--color-neutral-200)"><figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Drywall install</figcaption></figure>
-      <figure data-zoom="1" style="margin:0"><img src="photos/closets-carpentry1.jpg" alt="Built-in closet carpentry" loading="lazy" decoding="async" width="1289" height="1714" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:var(--color-neutral-200)"><figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Closets &amp; carpentry</figcaption></figure>
-      <figure data-zoom="1" style="margin:0"><img src="photos/closets-carpentry2.jpg" alt="Closet shelving and trim carpentry" loading="lazy" decoding="async" width="1289" height="1699" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:var(--color-neutral-200)"><figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Closets &amp; carpentry</figcaption></figure>
-      <figure data-zoom="1" style="margin:0"><img src="photos/window1.jpg" alt="Window installed in a framed opening" loading="lazy" decoding="async" width="1289" height="1701" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:var(--color-neutral-200)"><figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Window installation</figcaption></figure>
-      <figure data-zoom="1" style="margin:0"><img src="photos/window2.jpg" alt="New window fitted and trimmed" loading="lazy" decoding="async" width="1289" height="1707" style="width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;background:var(--color-neutral-200)"><figcaption style="font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px">Window installation</figcaption></figure>
+    <div class="work-shots" data-carousel data-layout="mixed" role="region" aria-label="Basement, drywall, carpentry and window photos">
+      <figure class="span-full ratio-21" data-zoom="1"><img src="photos/basement1.jpg" alt="Basement renovation in progress: framed walls, concrete floor opened for drain lines" loading="lazy" decoding="async" width="1289" height="961"><figcaption>Basement renovations</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/drywall1.jpg" alt="Drywall installed and taped" loading="lazy" decoding="async" width="1289" height="2259"><figcaption>Drywall install</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/drywall2.jpg" alt="Drywall install in a finished room" loading="lazy" decoding="async" width="1289" height="1709"><figcaption>Drywall install</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/closets-carpentry1.jpg" alt="Built-in closet carpentry" loading="lazy" decoding="async" width="1289" height="1714"><figcaption>Closets &amp; carpentry</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/closets-carpentry2.jpg" alt="Closet shelving and trim carpentry" loading="lazy" decoding="async" width="1289" height="1699"><figcaption>Closets &amp; carpentry</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/window1.jpg" alt="Window installed in a framed opening" loading="lazy" decoding="async" width="1289" height="1701"><figcaption>Window installation</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/window2.jpg" alt="New window fitted and trimmed" loading="lazy" decoding="async" width="1289" height="1707"><figcaption>Window installation</figcaption></figure>
     </div>
   </article>
 </section>
@@ -248,31 +307,31 @@ input,textarea,button{font:inherit;color:inherit}
       <div>
         <h3 style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);border-bottom:2px solid var(--color-divider);padding-bottom:12px">Bathrooms &amp; kitchens</h3>
         <ul style="list-style:none;margin:0;padding:0">
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Master bathroom</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Bathroom remodel</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Bathroom tile &amp; glass door installation</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Kitchens</li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-master-bathroom" data-svc="1" style="padding:16px 0">Master bathroom</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-bathroom-remodel" data-svc="1" style="padding:16px 0">Bathroom remodel</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-bathroom-tile" data-svc="1" style="padding:16px 0">Bathroom tile &amp; glass door installation</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-kitchens" data-svc="1" style="padding:16px 0">Kitchens</a></li>
         </ul>
       </div>
       <div>
         <h3 style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);border-bottom:2px solid var(--color-divider);padding-bottom:12px">Structure &amp; interiors</h3>
         <ul style="list-style:none;margin:0;padding:0">
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Framing</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Custom framing</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Drywall install</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Closets &amp; carpentry</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Basement renovations</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Window installation</li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-framing" data-svc="1" style="padding:16px 0">Framing</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-framing" data-svc="1" style="padding:16px 0">Custom framing</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-interiors" data-svc="1" style="padding:16px 0">Drywall install</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-interiors" data-svc="1" style="padding:16px 0">Closets &amp; carpentry</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-interiors" data-svc="1" style="padding:16px 0">Basement renovations</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-interiors" data-svc="1" style="padding:16px 0">Window installation</a></li>
         </ul>
       </div>
       <div>
         <h3 style="margin:0 0 4px;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700);border-bottom:2px solid var(--color-divider);padding-bottom:12px">Exterior &amp; site</h3>
         <ul style="list-style:none;margin:0;padding:0">
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Shingle roofing</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Trex deck</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Asphalt paving</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Driveways &amp; walkways</li>
-          <li data-svc="1" style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;padding:16px 0;border-bottom:2px solid var(--color-divider)">Tile, stone &amp; concrete excavation</li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-shingle" data-svc="1" style="padding:16px 0">Shingle roofing</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-trex" data-svc="1" style="padding:16px 0">Trex deck</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-asphalt" data-svc="1" style="padding:16px 0">Asphalt paving</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-asphalt" data-svc="1" style="padding:16px 0">Driveways &amp; walkways</a></li>
+          <li style="font-family:var(--font-heading);font-weight:700;font-size:clamp(17px,1.7vw,22px);letter-spacing:-.01em;border-bottom:2px solid var(--color-divider)"><a href="#work-tile-stone" data-svc="1" style="padding:16px 0">Tile, stone &amp; concrete excavation</a></li>
         </ul>
       </div>
     </div>
@@ -280,11 +339,24 @@ input,textarea,button{font:inherit;color:inherit}
 </section>
 
 <section id="about" style="border-bottom:2px solid var(--color-divider)">
-  <div style="width:100%;max-width:1560px;margin:0 auto;padding:clamp(48px,8vw,120px) clamp(18px,4vw,56px);display:grid;gap:clamp(20px,4vw,64px);grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))">
-    <h2 style="margin:0;font-size:clamp(30px,5.5vw,72px);line-height:1;letter-spacing:-.03em;text-transform:uppercase">About</h2>
-    <div style="max-width:34ch">
-      <p style="margin:0 0 clamp(20px,3vw,32px);font-size:clamp(20px,2.4vw,30px);font-weight:500;line-height:1.25;letter-spacing:-.015em;text-wrap:pretty">Menachem Glazer is a contractor and construction company owner.</p>
-      <p style="margin:0;font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700)">Glazer Construction &nbsp;/&nbsp; Waterbury, CT</p>
+  <div class="about-inner">
+    <div class="about-top">
+      <h2 style="margin:0;font-size:clamp(30px,5.5vw,72px);line-height:1;letter-spacing:-.03em;text-transform:uppercase">About</h2>
+      <div class="about-bio">
+        <figure class="about-portrait" style="margin:0;width:160px;max-width:160px;flex:0 0 160px;aspect-ratio:3/4;overflow:hidden">
+          <img src="photos/bio.jpeg" alt="Menachem Glazer on a framed job site" width="160" height="213" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:50% 28%">
+        </figure>
+        <div class="about-copy">
+          <p class="about-lead">Glazer Construction was built from a lifelong passion for construction.</p>
+          <p class="about-body">Menachem grew up working in his father's construction company from a young age before establishing Glazer Construction in 2023. He is passionate about detailed, quality work and specializes in residential construction for homeowners.</p>
+          <p class="about-body">Glazer Construction also takes on commercial fit-outs and multi-family construction, serving homeowners, investors, and landlords alike, with quality construction and your budget in mind.</p>
+          <p class="about-loc">Glazer Construction &nbsp;/&nbsp; Waterbury, CT</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-atmosphere" data-carousel role="region" aria-label="Finished interiors">
+      <figure data-zoom="1"><img src="photos/nice.jpeg" alt="Finished living room with ocean views, fireplace and curved sectional" loading="lazy" decoding="async"></figure>
+      <figure data-zoom="1"><img src="photos/nice2.jpeg" alt="Finished living room looking toward the fireplace and stair" loading="lazy" decoding="async"></figure>
     </div>
   </div>
 </section>
@@ -393,23 +465,122 @@ class Component extends DCLogic {
     const targets = Array.from(document.querySelectorAll('[data-reveal]'));
     if (reduced || !('IntersectionObserver' in window)) {
       targets.forEach(el => el.setAttribute('data-reveal', 'in'));
-      return;
+    } else {
+      this.io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.setAttribute('data-reveal', 'in');
+            this.io.unobserve(e.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+      targets.forEach(el => this.io.observe(el));
     }
-    this.io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.setAttribute('data-reveal', 'in');
-          this.io.unobserve(e.target);
+    this.initCarousels(reduced);
+  }
+
+  initCarousels(reduced) {
+    this.carouselCleanups = [];
+    const mq = window.matchMedia('(max-width: 900px)');
+    document.querySelectorAll('[data-carousel]').forEach(el => {
+      const originals = Array.from(el.querySelectorAll(':scope > figure'));
+      const state = { visible: false, dragging: false, raf: 0, setWidth: 0 };
+
+      const clearClones = () => {
+        el.querySelectorAll('[data-clone]').forEach(n => n.remove());
+      };
+      const measure = () => {
+        const first = originals[0];
+        const clone = el.querySelector('[data-clone]');
+        state.setWidth = first && clone ? clone.offsetLeft - first.offsetLeft : 0;
+      };
+      const syncClones = () => {
+        clearClones();
+        if (!mq.matches || originals.length < 2) return;
+        originals.forEach(fig => {
+          const c = fig.cloneNode(true);
+          c.setAttribute('data-clone', '1');
+          c.setAttribute('aria-hidden', 'true');
+          el.appendChild(c);
+        });
+        measure();
+      };
+      const wrap = () => {
+        if (!state.setWidth) return;
+        if (el.scrollLeft >= state.setWidth) el.scrollLeft -= state.setWidth;
+        else if (el.scrollLeft < 0) el.scrollLeft += state.setWidth;
+      };
+      const tick = (now) => {
+        if (!state.last) state.last = now;
+        const dt = Math.min(32, now - state.last);
+        state.last = now;
+        if (mq.matches && !reduced && state.visible && !state.dragging) {
+          el.scrollLeft += dt * 0.028;
+          wrap();
         }
+        state.raf = requestAnimationFrame(tick);
+      };
+      const start = () => {
+        if (state.raf || reduced) return;
+        state.last = 0;
+        state.raf = requestAnimationFrame(tick);
+      };
+      const stop = () => {
+        if (state.raf) cancelAnimationFrame(state.raf);
+        state.raf = 0;
+        state.last = 0;
+      };
+      const onDown = () => { state.dragging = true; };
+      const onUp = () => { state.dragging = false; wrap(); };
+      const onScroll = () => { wrap(); };
+      const onMq = () => {
+        syncClones();
+        if (mq.matches) start();
+        else { stop(); el.scrollLeft = 0; }
+      };
+
+      syncClones();
+      el.addEventListener('pointerdown', onDown);
+      el.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('pointerup', onUp);
+      window.addEventListener('pointercancel', onUp);
+      if (mq.addEventListener) mq.addEventListener('change', onMq);
+      else mq.addListener(onMq);
+
+      let visIo = null;
+      if ('IntersectionObserver' in window) {
+        visIo = new IntersectionObserver((entries) => {
+          entries.forEach(e => {
+            state.visible = e.isIntersecting;
+            if (state.visible && mq.matches) start();
+            else if (!state.visible) stop();
+          });
+        }, { threshold: 0.2 });
+        visIo.observe(el);
+      } else {
+        state.visible = true;
+        if (mq.matches) start();
+      }
+
+      this.carouselCleanups.push(() => {
+        stop();
+        clearClones();
+        el.removeEventListener('pointerdown', onDown);
+        el.removeEventListener('scroll', onScroll);
+        window.removeEventListener('pointerup', onUp);
+        window.removeEventListener('pointercancel', onUp);
+        if (mq.removeEventListener) mq.removeEventListener('change', onMq);
+        else mq.removeListener(onMq);
+        if (visIo) visIo.disconnect();
       });
-    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
-    targets.forEach(el => this.io.observe(el));
+    });
   }
 
   componentDidUpdate() { this.applyOptions(); }
 
   componentWillUnmount() {
     if (this.io) this.io.disconnect();
+    if (this.carouselCleanups) this.carouselCleanups.forEach(fn => fn());
     document.documentElement.removeAttribute('data-photo');
   }
 
