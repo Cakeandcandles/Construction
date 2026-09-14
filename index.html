@@ -3,6 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+header a.site-logo{display:flex;align-items:center;flex:0 0 auto;line-height:0;color:var(--color-text,#201e1d)}
+header a.site-logo img{display:block!important;width:auto!important;max-width:none!important;height:var(--site-logo-h,62px)!important;object-fit:contain;object-position:left center}
+@media (min-width:901px){
+  header a.site-logo img{height:var(--site-logo-h,70px)!important}
+}
+</style>
 <script src="./support.js"></script>
 </head>
 <body>
@@ -109,7 +116,9 @@ input,textarea,button{font:inherit;color:inherit}
 
 <header style="position:sticky;top:0;z-index:60;background:var(--color-bg);border-bottom:2px solid var(--color-divider)">
   <div style="width:100%;max-width:1560px;margin:0 auto;padding:0 clamp(18px,4vw,56px);height:clamp(62px,7vw,80px);display:flex;align-items:center;justify-content:space-between;gap:24px">
-    <a href="#top" style="font-family:var(--font-heading);font-weight:800;font-size:clamp(13px,1.6vw,17px);letter-spacing:.07em;text-transform:uppercase;color:var(--color-text);line-height:1">Glazer Construction</a>
+    <a href="#top" class="site-logo" aria-label="Glazer Construction home" style="display:flex;align-items:center;flex:0 0 auto;line-height:0">
+      <img src="photos/logo.jpg" alt="Glazer Construction" width="415" height="254" decoding="async" style="display:block;height:62px;width:auto;max-width:none;object-fit:contain">
+    </a>
     <nav data-desk="1" aria-label="Primary" style="display:flex;align-items:center;gap:clamp(14px,2.2vw,34px)">
       <a href="#work" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">Work</a>
       <a href="#services" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">Services</a>
