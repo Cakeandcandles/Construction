@@ -36,10 +36,15 @@ input,textarea,button{font:inherit;color:inherit}
 .work-shots figure{margin:0;background:var(--color-neutral-200);min-width:0}
 .work-shots img{width:100%;height:auto;object-fit:cover;display:block}
 .work-shots figcaption{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px;background:transparent}
-.work-shots[data-layout="kitchens"],
+.work-shots[data-layout="kitchens"]{grid-template-columns:repeat(6,minmax(0,1fr))}
+.work-shots[data-layout="kitchens"] > figure:nth-child(2),
+.work-shots[data-layout="kitchens"] > figure:nth-child(3){grid-column:span 3}
+.work-shots[data-layout="kitchens"] > figure:nth-child(n+4){grid-column:span 2}
 .work-shots[data-layout="tilebath"]{grid-template-columns:repeat(3,minmax(0,1fr))}
 .work-shots[data-layout="master"]{grid-template-columns:repeat(4,minmax(0,1fr))}
-.work-shots[data-layout="remodel"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-shots[data-layout="remodel"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.work-shots[data-layout="remodel"] .span-2{grid-column:auto}
+.work-shots[data-layout="remodel"] .ratio-43 img{aspect-ratio:3/4}
 .work-shots[data-layout="framing"]{grid-template-columns:repeat(4,minmax(0,1fr))}
 .work-shots[data-layout="pair"]{grid-template-columns:repeat(2,minmax(0,1fr))}
 .work-shots[data-layout="stone"]{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -54,23 +59,21 @@ input,textarea,button{font:inherit;color:inherit}
 .work-shots .ratio-1610 img{aspect-ratio:16/10}
 .about-inner{width:100%;max-width:1560px;margin:0 auto;padding:clamp(48px,8vw,120px) clamp(18px,4vw,56px);display:grid;gap:clamp(28px,4vw,56px)}
 .about-top{display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:minmax(180px,.7fr) minmax(280px,1.3fr);align-items:start}
-.about-bio{display:flex;gap:clamp(16px,2.4vw,28px);align-items:flex-start}
-.about-portrait{width:160px;flex:0 0 160px;max-width:160px;min-width:0;aspect-ratio:3/4;overflow:hidden;background:var(--color-neutral-200)}
-.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 28%}
-.about-copy{min-width:0;max-width:62ch;background:var(--color-bg)}
+.about-bio{display:grid;grid-template-columns:160px minmax(0,1fr);column-gap:clamp(16px,2.4vw,28px);row-gap:0;align-items:start}
+.about-portrait{width:160px;flex:0 0 160px;max-width:160px;min-width:0;aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--color-neutral-200);grid-column:1;grid-row:1 / span 2}
+.about-portrait img{width:100%;height:100%;object-fit:cover;object-position:50% 28%;border-radius:50%}
+.about-lead{grid-column:2;margin:0 0 14px;max-width:62ch;font-size:clamp(20px,2.2vw,28px);font-weight:500;line-height:1.28;letter-spacing:-.015em;text-wrap:pretty}
+.about-copy{grid-column:2;min-width:0;max-width:62ch;background:var(--color-bg)}
 .about-copy p{margin:0 0 14px}
 .about-copy p:last-child{margin-bottom:0}
-.about-lead{font-size:clamp(20px,2.2vw,28px);font-weight:500;line-height:1.28;letter-spacing:-.015em;text-wrap:pretty}
 .about-body{font-size:clamp(15px,1.15vw,17px);line-height:1.55;color:var(--color-neutral-800)}
 .about-loc{font-size:15px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px}
 .about-atmosphere{display:grid;gap:clamp(10px,1.4vw,18px);grid-template-columns:repeat(2,minmax(0,1fr))}
 .about-atmosphere figure{margin:0;background:var(--color-neutral-200);min-width:0}
 .about-atmosphere img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
 @media (max-width:1100px){
-  .work-shots[data-layout="kitchens"],
   .work-shots[data-layout="master"],
   .work-shots[data-layout="tilebath"],
-  .work-shots[data-layout="remodel"],
   .work-shots[data-layout="framing"],
   .work-shots[data-layout="stone"],
   .work-shots[data-layout="mixed"]{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -78,15 +81,17 @@ input,textarea,button{font:inherit;color:inherit}
 @media (max-width:900px){
   [data-desk]{display:none !important}
   [data-mob]{display:inline-flex !important}
-  .about-top{grid-template-columns:1fr}
-  .about-bio{flex-direction:column;align-items:flex-start}
-  .about-portrait{width:120px !important;flex:0 0 120px !important;max-width:120px !important;height:120px !important;aspect-ratio:1 !important;border-radius:50%;overflow:hidden}
+  .about-top{grid-template-columns:1fr;gap:16px}
+  .about-bio{grid-template-columns:minmax(0,1fr) 120px;grid-template-rows:auto auto;column-gap:14px;row-gap:22px;align-items:center}
+  .about-portrait{width:120px !important;flex:0 0 120px !important;max-width:120px !important;height:120px !important;aspect-ratio:1 !important;border-radius:50%;overflow:hidden;grid-column:2;grid-row:1;justify-self:end}
   .about-portrait img{border-radius:50%;object-position:50% 22%}
-  [data-carousel]{display:flex;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;gap:12px;scrollbar-width:none}
+  .about-lead{grid-column:1;grid-row:1;margin:0;max-width:none;justify-self:stretch;align-self:center;text-align:left;font-size:clamp(18px,5vw,22px)}
+  .about-copy{grid-column:1 / -1;grid-row:2;max-width:none}
+  [data-carousel]{display:flex;overflow-x:auto;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;gap:12px;scrollbar-width:none;scroll-snap-type:x mandatory}
   [data-carousel]::-webkit-scrollbar{display:none}
   [data-carousel] figure,
   [data-carousel] .span-full,
-  [data-carousel] .span-2{flex:0 0 78%;grid-column:auto}
+  [data-carousel] .span-2{flex:0 0 78%;grid-column:auto;scroll-snap-align:start;scroll-snap-stop:always}
   [data-carousel] img,
   [data-carousel] .ratio-169 img,
   [data-carousel] .ratio-219 img,
@@ -343,11 +348,11 @@ input,textarea,button{font:inherit;color:inherit}
     <div class="about-top">
       <h2 style="margin:0;font-size:clamp(30px,5.5vw,72px);line-height:1;letter-spacing:-.03em;text-transform:uppercase">About</h2>
       <div class="about-bio">
-        <figure class="about-portrait" style="margin:0;width:160px;max-width:160px;flex:0 0 160px;aspect-ratio:3/4;overflow:hidden">
-          <img src="photos/bio.jpeg" alt="Menachem Glazer on a framed job site" width="160" height="213" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:50% 28%">
+        <figure class="about-portrait" style="margin:0;width:160px;max-width:160px;flex:0 0 160px;aspect-ratio:1;border-radius:50%;overflow:hidden">
+          <img src="photos/bio.jpeg" alt="Menachem Glazer on a framed job site" width="160" height="160" decoding="async" style="width:100%;height:100%;object-fit:cover;object-position:50% 28%;border-radius:50%">
         </figure>
+        <p class="about-lead">Glazer Construction was built from a lifelong passion for construction.</p>
         <div class="about-copy">
-          <p class="about-lead">Glazer Construction was built from a lifelong passion for construction.</p>
           <p class="about-body">Menachem grew up working in his father's construction company from a young age before establishing Glazer Construction in 2023. He is passionate about detailed, quality work and specializes in residential construction for homeowners.</p>
           <p class="about-body">Glazer Construction also takes on commercial fit-outs and multi-family construction, serving homeowners, investors, and landlords alike, with quality construction and your budget in mind.</p>
           <p class="about-loc">Glazer Construction &nbsp;/&nbsp; Waterbury, CT</p>
@@ -476,111 +481,12 @@ class Component extends DCLogic {
       }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
       targets.forEach(el => this.io.observe(el));
     }
-    this.initCarousels(reduced);
-  }
-
-  initCarousels(reduced) {
-    this.carouselCleanups = [];
-    const mq = window.matchMedia('(max-width: 900px)');
-    document.querySelectorAll('[data-carousel]').forEach(el => {
-      const originals = Array.from(el.querySelectorAll(':scope > figure'));
-      const state = { visible: false, dragging: false, raf: 0, setWidth: 0 };
-
-      const clearClones = () => {
-        el.querySelectorAll('[data-clone]').forEach(n => n.remove());
-      };
-      const measure = () => {
-        const first = originals[0];
-        const clone = el.querySelector('[data-clone]');
-        state.setWidth = first && clone ? clone.offsetLeft - first.offsetLeft : 0;
-      };
-      const syncClones = () => {
-        clearClones();
-        if (!mq.matches || originals.length < 2) return;
-        originals.forEach(fig => {
-          const c = fig.cloneNode(true);
-          c.setAttribute('data-clone', '1');
-          c.setAttribute('aria-hidden', 'true');
-          el.appendChild(c);
-        });
-        measure();
-      };
-      const wrap = () => {
-        if (!state.setWidth) return;
-        if (el.scrollLeft >= state.setWidth) el.scrollLeft -= state.setWidth;
-        else if (el.scrollLeft < 0) el.scrollLeft += state.setWidth;
-      };
-      const tick = (now) => {
-        if (!state.last) state.last = now;
-        const dt = Math.min(32, now - state.last);
-        state.last = now;
-        if (mq.matches && !reduced && state.visible && !state.dragging) {
-          el.scrollLeft += dt * 0.028;
-          wrap();
-        }
-        state.raf = requestAnimationFrame(tick);
-      };
-      const start = () => {
-        if (state.raf || reduced) return;
-        state.last = 0;
-        state.raf = requestAnimationFrame(tick);
-      };
-      const stop = () => {
-        if (state.raf) cancelAnimationFrame(state.raf);
-        state.raf = 0;
-        state.last = 0;
-      };
-      const onDown = () => { state.dragging = true; };
-      const onUp = () => { state.dragging = false; wrap(); };
-      const onScroll = () => { wrap(); };
-      const onMq = () => {
-        syncClones();
-        if (mq.matches) start();
-        else { stop(); el.scrollLeft = 0; }
-      };
-
-      syncClones();
-      el.addEventListener('pointerdown', onDown);
-      el.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('pointerup', onUp);
-      window.addEventListener('pointercancel', onUp);
-      if (mq.addEventListener) mq.addEventListener('change', onMq);
-      else mq.addListener(onMq);
-
-      let visIo = null;
-      if ('IntersectionObserver' in window) {
-        visIo = new IntersectionObserver((entries) => {
-          entries.forEach(e => {
-            state.visible = e.isIntersecting;
-            if (state.visible && mq.matches) start();
-            else if (!state.visible) stop();
-          });
-        }, { threshold: 0.2 });
-        visIo.observe(el);
-      } else {
-        state.visible = true;
-        if (mq.matches) start();
-      }
-
-      this.carouselCleanups.push(() => {
-        stop();
-        clearClones();
-        el.removeEventListener('pointerdown', onDown);
-        el.removeEventListener('scroll', onScroll);
-        window.removeEventListener('pointerup', onUp);
-        window.removeEventListener('pointercancel', onUp);
-        if (mq.removeEventListener) mq.removeEventListener('change', onMq);
-        else mq.removeListener(onMq);
-        if (visIo) visIo.disconnect();
-      });
-    });
   }
 
   componentDidUpdate() { this.applyOptions(); }
 
   componentWillUnmount() {
     if (this.io) this.io.disconnect();
-    if (this.carouselCleanups) this.carouselCleanups.forEach(fn => fn());
     document.documentElement.removeAttribute('data-photo');
   }
 
