@@ -24,7 +24,7 @@ header a.site-logo img{display:block!important;width:auto!important;max-width:no
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-text-size-adjust:100%}
 body{margin:0;background:var(--color-bg);color:var(--color-text);font-family:var(--font-body);font-size:16px;line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
-img{display:block;max-width:100%}
+img,video{display:block;max-width:100%}
 a{color:var(--color-accent);text-decoration:none}
 a:hover{color:var(--color-accent-600)}
 :focus-visible{outline:2px solid var(--color-accent);outline-offset:3px}
@@ -53,7 +53,13 @@ input,textarea,button{font:inherit;color:inherit}
 .work-shots[data-layout="remodel"] .span-2{grid-column:auto}
 .work-shots[data-layout="remodel"] .ratio-43 img{aspect-ratio:3/4}
 .work-shots[data-layout="framing"]{grid-template-columns:repeat(4,minmax(0,1fr))}
+.work-shots[data-layout="framing"] > figure:nth-child(n+6){grid-column:span 2}
 .work-shots[data-layout="pair"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+.work-shots[data-layout="shingle"]{grid-template-columns:repeat(6,minmax(0,1fr))}
+.work-shots[data-layout="shingle"] > figure:nth-child(-n+2){grid-column:span 3}
+.work-shots[data-layout="shingle"] > figure:nth-child(n+3){grid-column:span 2}
+.work-shots[data-layout="siding"]{grid-template-columns:repeat(3,minmax(0,1fr))}
+.work-shots[data-layout="siding"] > figure:first-child{grid-column:1/-1}
 .work-shots[data-layout="stone"]{grid-template-columns:repeat(3,minmax(0,1fr))}
 .work-shots[data-layout="mixed"]{grid-template-columns:repeat(3,minmax(0,1fr))}
 .work-shots .span-full{grid-column:1/-1}
@@ -64,6 +70,10 @@ input,textarea,button{font:inherit;color:inherit}
 .work-shots .ratio-43 img{aspect-ratio:4/3}
 .work-shots .ratio-34 img{aspect-ratio:3/4}
 .work-shots .ratio-1610 img{aspect-ratio:16/10}
+.work-follow{margin-top:clamp(16px,2vw,24px)}
+.work-motion{margin:clamp(16px,2vw,24px) 0 0;background:transparent;min-width:0}
+.work-motion video{width:100%;aspect-ratio:16/9;height:auto;object-fit:cover;display:block;background:var(--color-neutral-200);pointer-events:none}
+.work-motion figcaption{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--color-neutral-700);margin-top:8px}
 .about-inner{width:100%;max-width:1560px;margin:0 auto;padding:clamp(48px,8vw,120px) clamp(18px,4vw,56px);display:grid;gap:clamp(28px,4vw,56px)}
 .about-top{display:grid;gap:clamp(24px,4vw,64px);grid-template-columns:minmax(180px,.7fr) minmax(280px,1.3fr);align-items:start}
 .about-bio{display:grid;grid-template-columns:160px minmax(0,1fr);column-gap:clamp(16px,2.4vw,28px);row-gap:0;align-items:start}
@@ -82,8 +92,13 @@ input,textarea,button{font:inherit;color:inherit}
   .work-shots[data-layout="master"],
   .work-shots[data-layout="tilebath"],
   .work-shots[data-layout="framing"],
+  .work-shots[data-layout="shingle"],
+  .work-shots[data-layout="siding"],
   .work-shots[data-layout="stone"],
   .work-shots[data-layout="mixed"]{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work-shots[data-layout="shingle"] > figure:nth-child(-n+2),
+  .work-shots[data-layout="shingle"] > figure:nth-child(n+3){grid-column:auto}
+  .work-shots[data-layout="shingle"] > figure:nth-child(5){grid-column:1/-1}
 }
 @media (max-width:900px){
   [data-desk]{display:none !important}
@@ -107,6 +122,15 @@ input,textarea,button{font:inherit;color:inherit}
   [data-carousel] .ratio-34 img,
   [data-carousel] .ratio-1610 img{aspect-ratio:4/5;height:auto}
   .about-atmosphere[data-carousel] img{aspect-ratio:16/10}
+  .work-shots[data-layout="siding"]{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work-shots[data-layout="siding"] > figure,
+  .work-shots[data-layout="siding"] > figure:first-child{flex:none;grid-column:auto;scroll-snap-align:unset}
+  .work-shots[data-layout="siding"] > figure:first-child{grid-column:1/-1}
+  .work-shots[data-layout="siding"] img{aspect-ratio:4/5;height:auto}
+  .work-shots[data-layout="siding"] > figure:first-child img{aspect-ratio:16/10}
+  .work-shots[data-layout="pair"]:not([data-carousel]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work-shots[data-layout="pair"]:not([data-carousel]) > figure{flex:none;grid-column:auto}
+  .work-motion video{aspect-ratio:16/10}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-anim] [data-reveal]{opacity:1;transform:none}[data-zoom] img{transition:none}[data-zoom]:hover img{transform:none}}
 </style>
@@ -195,6 +219,12 @@ input,textarea,button{font:inherit;color:inherit}
       <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens5.jpeg" alt="Kitchen with white cabinets, quartz island, woven pendant lights and hexagonal tile floor" loading="lazy" decoding="async"></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/kitchens6.jpeg" alt="Commercial pantry kitchen with light wood cabinetry and quartz counters" loading="lazy" decoding="async"></figure>
     </div>
+    <figure class="work-motion">
+      <video data-loop autoplay muted loop playsinline webkit-playsinline preload="none" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback" aria-label="Walkthrough of a finished kitchen">
+        <source src="videos/kitchen-vid.mp4" type="video/mp4">
+      </video>
+      <figcaption>Walkthrough of a finished kitchen</figcaption>
+    </figure>
   </article>
 
   <article id="work-master-bathroom" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
@@ -232,6 +262,10 @@ input,textarea,button{font:inherit;color:inherit}
       <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel2.jpg" alt="Bathroom remodel: shower and tile detail" loading="lazy" decoding="async" width="1289" height="1704"></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel3.jpg" alt="Bathroom remodel: vanity and fittings" loading="lazy" decoding="async" width="1289" height="1717"></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel4.jpeg" alt="Remodeled bathroom with navy vanity, white tile wainscot and pendant lights" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel5.jpeg" alt="Marble-look shower floor tile being set on Schluter KERDI around the drain, with orange uncoupling membrane still exposed" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel6.jpeg" alt="Finished bathroom with light-oak vanity, marble-look walls, and a sliding glass tub and shower with hexagonal niche" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel7.jpeg" alt="Powder bathroom with a floating white vanity, gold hardware, marble wainscot, and brass sconces" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/bathroom-remodel8.jpeg" alt="Marble wainscot bathroom with a gold-framed glass shower and dual niches" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
@@ -246,6 +280,8 @@ input,textarea,button{font:inherit;color:inherit}
       <figure class="ratio-34" data-zoom="1"><img src="photos/framing2.jpg" alt="Framed interior walls and openings" loading="lazy" decoding="async" width="1289" height="2287"></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/custom-framing1.jpg" alt="Custom framing detail" loading="lazy" decoding="async" width="1289" height="1712"></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/framing3.jpeg" alt="Interior framing and ceiling work during a renovation" loading="lazy" decoding="async"></figure>
+      <figure class="span-2 ratio-43" data-zoom="1"><img src="photos/framing4.jpeg" alt="New wood porch framed onto a weathered Victorian house" loading="lazy" decoding="async"></figure>
+      <figure class="span-2 ratio-43" data-zoom="1"><img src="photos/framing5.jpeg" alt="ZIP System–sheathed mudroom addition being framed onto a brick house" loading="lazy" decoding="async"></figure>
     </div>
   </article>
 
@@ -254,9 +290,24 @@ input,textarea,button{font:inherit;color:inherit}
       <span style="font-size:12px;font-weight:700;letter-spacing:.14em;color:var(--color-accent)">06</span>
       <h3 style="margin:0;font-size:clamp(24px,4.2vw,56px);line-height:1;letter-spacing:-.025em;text-transform:uppercase">Shingle Roofing</h3>
     </header>
-    <div class="work-shots" data-carousel data-layout="pair" role="region" aria-label="Shingle roofing photos">
+    <div class="work-shots" data-carousel data-layout="shingle" role="region" aria-label="Shingle roofing photos">
       <figure class="ratio-43" data-zoom="1"><img src="photos/shingle2.jpg" alt="Shingle roof installation seen from above" loading="lazy" decoding="async" width="1289" height="740"></figure>
       <figure class="ratio-43" data-zoom="1"><img src="photos/shingle1.jpg" alt="Roof shingles being laid on a house" loading="lazy" decoding="async" width="1289" height="2296"></figure>
+      <figure class="ratio-43" data-zoom="1"><img src="photos/shingle3.jpeg" alt="Completed architectural shingle roof looking down the ridge" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-43" data-zoom="1"><img src="photos/shingle4.jpeg" alt="TRI-BUILT underlayment and GAF Timberline HD shingle bundles staged on a roof" loading="lazy" decoding="async"></figure>
+      <figure class="ratio-43" data-zoom="1"><img src="photos/shingle5.jpeg" alt="Finished dark architectural shingles with hip and ridge cap" loading="lazy" decoding="async"></figure>
+    </div>
+  </article>
+
+  <article data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
+    <header style="margin-bottom:clamp(20px,3vw,36px)">
+      <p style="margin:0;font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-accent-700)">Siding</p>
+    </header>
+    <div class="work-shots" data-layout="siding" role="region" aria-label="Siding and envelope photos">
+      <figure class="ratio-1610" data-zoom="1"><img src="photos/siding.jpeg" alt="White clapboard house with navy porch columns, wraparound porch, and a stone foundation" loading="lazy" decoding="async"><figcaption>White clapboard, navy porch, stone foundation</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/before-siding.jpeg" alt="House mid re-side with foam sheathing on the gables, scaffolding, and ladders" loading="lazy" decoding="async"><figcaption>Siding in progress</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/siding2.jpeg" alt="Carpenter on a ladder installing soffit and siding" loading="lazy" decoding="async"><figcaption>Soffit and siding going on</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/siding3.jpeg" alt="Elevation wrapped in Norandex housewrap, crew carrying white siding panels" loading="lazy" decoding="async"><figcaption>Housewrap and siding panels</figcaption></figure>
     </div>
   </article>
 
@@ -310,7 +361,20 @@ input,textarea,button{font:inherit;color:inherit}
       <figure class="ratio-34" data-zoom="1"><img src="photos/closets-carpentry2.jpg" alt="Closet shelving and trim carpentry" loading="lazy" decoding="async" width="1289" height="1699"><figcaption>Closets &amp; carpentry</figcaption></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/window1.jpg" alt="Window installed in a framed opening" loading="lazy" decoding="async" width="1289" height="1701"><figcaption>Window installation</figcaption></figure>
       <figure class="ratio-34" data-zoom="1"><img src="photos/window2.jpg" alt="New window fitted and trimmed" loading="lazy" decoding="async" width="1289" height="1707"><figcaption>Window installation</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/closets-carpentry3.jpeg" alt="White built-in closet with LED-lit cubbies, hanging rod, and open millwork" loading="lazy" decoding="async"><figcaption>Closets &amp; carpentry</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/closets-carpentry9.jpeg" alt="Built-in bookshelf being assembled in a blue room" loading="lazy" decoding="async"><figcaption>Closets &amp; carpentry</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/window3.jpeg" alt="Two carpenters setting a replacement window, with shims holding the frame" loading="lazy" decoding="async"><figcaption>Window installation</figcaption></figure>
     </div>
+    <div class="work-shots work-follow" data-layout="pair" role="region" aria-label="Exterior door photos">
+      <figure class="ratio-34" data-zoom="1"><img src="photos/exterior-door.jpeg" alt="New black 6-lite exterior door with a smart lock, set in gray siding" loading="lazy" decoding="async"><figcaption>Black 6-lite entry door</figcaption></figure>
+      <figure class="ratio-34" data-zoom="1"><img src="photos/exterior-door2.jpeg" alt="White 10-lite French door set in housewrap on a new elevation" loading="lazy" decoding="async"><figcaption>French door in a new elevation</figcaption></figure>
+    </div>
+    <figure class="work-motion">
+      <video data-loop autoplay muted loop playsinline webkit-playsinline preload="none" disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback" aria-label="Walkthrough of a finished basement">
+        <source src="videos/finished-basement.mp4" type="video/mp4">
+      </video>
+      <figcaption>Kitchen remodel</figcaption>
+    </figure>
   </article>
 </section>
 
@@ -490,13 +554,52 @@ class Component extends DCLogic {
       }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
       targets.forEach(el => this.io.observe(el));
     }
+    this.bindMotionLoops(reduced);
   }
 
   componentDidUpdate() { this.applyOptions(); }
 
   componentWillUnmount() {
     if (this.io) this.io.disconnect();
+    if (this.vidIo) this.vidIo.disconnect();
     document.documentElement.removeAttribute('data-photo');
+  }
+
+  bindMotionLoops(reduced) {
+    const loops = Array.from(document.querySelectorAll('[data-loop]'));
+    loops.forEach(v => {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.playsInline = true;
+      v.setAttribute('muted', '');
+      v.controls = false;
+    });
+    if (!loops.length) return;
+    const freeze = (v) => {
+      v.pause();
+      try { v.currentTime = 0; } catch (e) {}
+    };
+    if (reduced) {
+      loops.forEach(v => {
+        v.removeAttribute('autoplay');
+        v.preload = 'metadata';
+        if (v.readyState >= 1) freeze(v);
+        else v.addEventListener('loadeddata', () => freeze(v), { once: true });
+      });
+      return;
+    }
+    const playSafe = (v) => { v.play().catch(() => {}); };
+    if (!('IntersectionObserver' in window)) {
+      loops.forEach(playSafe);
+      return;
+    }
+    this.vidIo = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) playSafe(e.target);
+        else e.target.pause();
+      });
+    }, { threshold: 0.35 });
+    loops.forEach(v => this.vidIo.observe(v));
   }
 
   applyOptions() {
