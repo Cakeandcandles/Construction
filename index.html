@@ -37,6 +37,12 @@ input,textarea,button{font:inherit;color:inherit}
 [data-zoom]:hover img{transform:scale(1.035)}
 [data-photo="bw"] [data-zoom] img{filter:grayscale(1) contrast(1.06)}
 [data-svc]:hover{color:var(--color-accent-700)}
+.walk-cta{position:relative;overflow:hidden;isolation:isolate;background:#4aa7cc;color:#fff;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:16px 24px;min-height:54px;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap;flex:0 0 auto;border-radius:12px;border:1px solid rgba(255,255,255,.28);box-shadow:0 8px 22px rgba(74,167,204,.28);animation:walk-bounce 2.6s ease-in-out infinite;transition:background .2s ease,box-shadow .2s ease}
+.walk-cta>span{position:relative;z-index:1}
+.walk-cta::after{content:"";position:absolute;top:0;left:-60%;width:42%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.22),transparent);pointer-events:none;animation:walk-shine 4.4s ease-in-out infinite}
+.walk-cta:hover{color:#fff;background:#5ab3d6;box-shadow:0 10px 26px rgba(74,167,204,.36)}
+@keyframes walk-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@keyframes walk-shine{0%{left:-60%;opacity:0}18%{opacity:1}55%{left:120%;opacity:.4}56%,100%{left:120%;opacity:0}}
 #services a{color:inherit;text-decoration:none;display:block}
 #services a:hover{color:var(--color-accent-700)}
 .work-shots{display:grid;gap:clamp(10px,1.4vw,18px);min-width:0}
@@ -103,6 +109,7 @@ input,textarea,button{font:inherit;color:inherit}
 @media (max-width:900px){
   [data-desk]{display:none !important}
   [data-mob]{display:inline-flex !important}
+  .walk-cta{display:none !important}
   .about-top{grid-template-columns:1fr;gap:16px}
   .about-bio{grid-template-columns:minmax(0,1fr) 120px;grid-template-rows:auto auto;column-gap:14px;row-gap:22px;align-items:center}
   .about-portrait{width:120px !important;flex:0 0 120px !important;max-width:120px !important;height:120px !important;aspect-ratio:1 !important;border-radius:50%;overflow:hidden;grid-column:2;grid-row:1;justify-self:end}
@@ -132,7 +139,7 @@ input,textarea,button{font:inherit;color:inherit}
   .work-shots[data-layout="pair"]:not([data-carousel]) > figure{flex:none;grid-column:auto}
   .work-motion video{aspect-ratio:16/10}
 }
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-anim] [data-reveal]{opacity:1;transform:none}[data-zoom] img{transition:none}[data-zoom]:hover img{transform:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}[data-anim] [data-reveal]{opacity:1;transform:none}[data-zoom] img{transition:none}[data-zoom]:hover img{transform:none}.walk-cta{animation:none}.walk-cta::after{animation:none}}
 </style>
 </helmet>
 
@@ -144,7 +151,7 @@ input,textarea,button{font:inherit;color:inherit}
       <img src="photos/logo.jpg" alt="Glazer Construction" width="415" height="254" decoding="async" style="display:block;height:62px;width:auto;max-width:none;object-fit:contain">
     </a>
     <nav data-desk="1" aria-label="Primary" style="display:flex;align-items:center;gap:clamp(14px,2.2vw,34px)">
-      <a href="#work" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">Work</a>
+      <a href="#work" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">Projects</a>
       <a href="#services" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">Services</a>
       <a href="#about" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">About</a>
       <a href="#contact" style="font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--color-text)">Contact</a>
@@ -156,6 +163,7 @@ input,textarea,button{font:inherit;color:inherit}
   <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
     <nav aria-label="Mobile" style="border-top:2px solid var(--color-divider);background:var(--color-bg);padding:clamp(18px,5vw,32px) clamp(18px,4vw,56px) clamp(26px,6vw,40px);display:grid;gap:2px">
       <a href="#work" onClick="{{ closeMenu }}" style="font-family:var(--font-heading);font-weight:800;font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--color-text);padding:12px 0;border-bottom:2px solid var(--color-divider)">Work</a>
+      <a href="walkthroughs.html" onClick="{{ closeMenu }}" style="font-family:var(--font-heading);font-weight:800;font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:#1e6a8c;padding:12px 0;border-bottom:2px solid var(--color-divider)">Walkthroughs</a>
       <a href="#services" onClick="{{ closeMenu }}" style="font-family:var(--font-heading);font-weight:800;font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--color-text);padding:12px 0;border-bottom:2px solid var(--color-divider)">Services</a>
       <a href="#about" onClick="{{ closeMenu }}" style="font-family:var(--font-heading);font-weight:800;font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--color-text);padding:12px 0;border-bottom:2px solid var(--color-divider)">About</a>
       <a href="#contact" onClick="{{ closeMenu }}" style="font-family:var(--font-heading);font-weight:800;font-size:26px;letter-spacing:-.01em;text-transform:uppercase;color:var(--color-text);padding:12px 0;border-bottom:2px solid var(--color-divider)">Contact</a>
@@ -204,6 +212,7 @@ input,textarea,button{font:inherit;color:inherit}
 
   <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:20px;padding:clamp(48px,8vw,120px) 0 clamp(24px,3vw,40px)">
     <h2 style="margin:0;font-size:clamp(30px,5.5vw,72px);line-height:1;letter-spacing:-.03em;text-transform:uppercase">Featured Projects</h2>
+    <a href="walkthroughs.html" class="walk-cta"><span>Virtual Walkthroughs</span></a>
   </div>
 
   <article id="work-kitchens" data-reveal="0" style="border-top:2px solid var(--color-divider);padding:clamp(32px,5vw,72px) 0">
